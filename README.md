@@ -61,16 +61,28 @@ If you prefer manual setup:
    chmod +x obsidian-docs-helper.sh
    ```
 
-4. Create Claude Code hook:
+4. Create Claude Code slash command:
    ```bash
-   mkdir -p ~/.claude
-   cat > ~/.claude/obsidian-docs-hook.sh << 'EOF'
-   #!/bin/bash
-   if [[ "$1" == "/obsidian-docs"* ]]; then
-       ~/.obsidian-docs/obsidian-docs-helper.sh "$@"
-   fi
-   EOF
-   chmod +x ~/.claude/obsidian-docs-hook.sh
+   mkdir -p ~/.claude/commands
+   cat > ~/.claude/commands/obsidian-docs.md << 'EOF'
+Execute the Obsidian Docs helper script
+
+Usage:
+- /obsidian-docs - List available categories
+- /obsidian-docs update - Update documentation from source
+- /obsidian-docs search <term> - Search for files containing term
+- /obsidian-docs content <term> - Search content with context
+- /obsidian-docs show <category> - Show files in specific category
+- /obsidian-docs status - Show installation status
+- /obsidian-docs help - Show this help
+
+Quick access:
+- /obsidian-docs plugins - Plugin documentation
+- /obsidian-docs sync - Sync documentation
+- /obsidian-docs publish - Publish documentation
+
+Execute: ~/.obsidian-docs/obsidian-docs-helper.sh "$ARGUMENTS"
+EOF
    ```
 
 ## Usage
@@ -171,7 +183,7 @@ Expected output:
 📁 Installation directory: /home/user/.obsidian-docs
 🔄 Last updated: [timestamp]
 📊 Documentation files: 158
-🔗 Claude Code hook installed
+🔗 Claude Code slash command installed
 ```
 
 ## Uninstallation
@@ -191,12 +203,12 @@ curl -fsSL https://raw.githubusercontent.com/kolenchuk/obsidian-docs/main/uninst
 ### Method 3: Manual removal
 
 ```bash
-rm -rf ~/.obsidian-docs ~/.claude/obsidian-docs-hook.sh
+rm -rf ~/.obsidian-docs ~/.claude/commands/obsidian-docs.md
 ```
 
 This will remove:
 - Installation directory (`~/.obsidian-docs/`)
-- Claude Code hook (`~/.claude/obsidian-docs-hook.sh`)
+- Claude Code slash command (`~/.claude/commands/obsidian-docs.md`)
 - All downloaded documentation
 
 ## Troubleshooting
@@ -210,14 +222,14 @@ If `/obsidian-docs` doesn't work:
    ~/.obsidian-docs/obsidian-docs-helper.sh "/obsidian-docs status"
    ```
 
-2. Verify hook exists:
+2. Verify slash command exists:
    ```bash
-   ls -la ~/.claude/obsidian-docs-hook.sh
+   ls -la ~/.claude/commands/obsidian-docs.md
    ```
 
-3. Test hook manually:
+3. Test helper script manually:
    ```bash
-   ~/.claude/obsidian-docs-hook.sh "/obsidian-docs help"
+   ~/.obsidian-docs/obsidian-docs-helper.sh "/obsidian-docs help"
    ```
 
 ### Documentation Not Found

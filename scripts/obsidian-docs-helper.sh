@@ -146,10 +146,10 @@ show_status() {
             echo "❌ Documentation directory not found"
         fi
         
-        if [ -f "$HOME/.claude/obsidian-docs-hook.sh" ]; then
-            echo "✅ Claude Code hook installed"
+        if [ -f "$HOME/.claude/commands/obsidian-docs.md" ]; then
+            echo "✅ Claude Code slash command installed"
         else
-            echo "⚠️ Claude Code hook not found"
+            echo "⚠️ Claude Code slash command not found"
         fi
     else
         echo "❌ Not installed"

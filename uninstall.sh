@@ -1,7 +1,7 @@
 #!/bin/bash
 
 INSTALL_DIR="$HOME/.obsidian-docs"
-CLAUDE_HOOK="$HOME/.claude/obsidian-docs-hook.sh"
+CLAUDE_COMMAND="$HOME/.claude/commands/obsidian-docs.md"
 
 echo "🗑️ Uninstalling Obsidian Docs..."
 
@@ -14,13 +14,13 @@ else
     echo "ℹ️ Installation directory not found"
 fi
 
-# Remove Claude Code hook
-if [ -f "$CLAUDE_HOOK" ]; then
-    echo "🔗 Removing Claude Code hook"
-    rm -f "$CLAUDE_HOOK"
-    echo "✅ Claude Code hook removed"
+# Remove Claude Code slash command
+if [ -f "$CLAUDE_COMMAND" ]; then
+    echo "🔗 Removing Claude Code slash command"
+    rm -f "$CLAUDE_COMMAND"
+    echo "✅ Claude Code slash command removed"
 else
-    echo "ℹ️ Claude Code hook not found"
+    echo "ℹ️ Claude Code slash command not found"
 fi
 
 echo "✅ Uninstallation complete!"
