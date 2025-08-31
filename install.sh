@@ -44,19 +44,31 @@ if [ -f "scripts/obsidian-docs-helper.sh" ]; then
     chmod +x "$INSTALL_DIR/obsidian-docs-helper.sh"
 fi
 
-# Create Claude Code hook
+# Create Claude Code slash command
 CLAUDE_DIR="$HOME/.claude"
-mkdir -p "$CLAUDE_DIR"
+COMMANDS_DIR="$CLAUDE_DIR/commands"
+mkdir -p "$COMMANDS_DIR"
 
 echo "🔗 Creating Claude Code integration..."
-cat > "$CLAUDE_DIR/obsidian-docs-hook.sh" << 'EOF'
-#!/bin/bash
-if [[ "$1" == "/obsidian-docs"* ]]; then
-    ~/.obsidian-docs/obsidian-docs-helper.sh "$@"
-fi
-EOF
+cat > "$COMMANDS_DIR/obsidian-docs.md" << 'EOF'
+Execute the Obsidian Docs helper script
 
-chmod +x "$CLAUDE_DIR/obsidian-docs-hook.sh"
+Usage:
+- /obsidian-docs - List available categories
+- /obsidian-docs update - Update documentation from source
+- /obsidian-docs search <term> - Search for files containing term
+- /obsidian-docs content <term> - Search content with context
+- /obsidian-docs show <category> - Show files in specific category
+- /obsidian-docs status - Show installation status
+- /obsidian-docs help - Show this help
+
+Quick access:
+- /obsidian-docs plugins - Plugin documentation
+- /obsidian-docs sync - Sync documentation
+- /obsidian-docs publish - Publish documentation
+
+Execute: ~/.obsidian-docs/obsidian-docs-helper.sh "$ARGUMENTS"
+EOF
 
 # Update timestamp
 date > "$INSTALL_DIR/.last_update"
